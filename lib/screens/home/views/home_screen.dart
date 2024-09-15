@@ -3,9 +3,19 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_expensee/screens/home/views/main_screen.dart';
+import 'package:flutter_expensee/screens/stats/views/stats_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int index = 0;
+  late Color selectedItem = Theme.of(context).colorScheme.primary;
+  Color unSelectedItem = const Color.fromARGB(255, 88, 88, 88);
 
   @override
   Widget build(BuildContext context) {
@@ -16,17 +26,28 @@ class HomeScreen extends StatelessWidget {
           top: Radius.circular(30),
         ),
         child: BottomNavigationBar(
+          onTap: (value) {
+            setState(() {
+              index = value;
+            });
+          },
           backgroundColor: Colors.white,
           showSelectedLabels: false,
           showUnselectedLabels: false,
           elevation: 3,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home),
+              icon: Icon(
+                CupertinoIcons.home,
+                color: index == 0 ? selectedItem : unSelectedItem,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.graph_circle_fill),
+              icon: Icon(
+                CupertinoIcons.graph_circle_fill,
+                color: index == 1 ? selectedItem : unSelectedItem,
+              ),
               label: 'Stats',
             ),
           ],
@@ -52,7 +73,7 @@ class HomeScreen extends StatelessWidget {
         ),
         onPressed: () {},
       ),
-      body: const MainScreen(),
+      body: index == 0 ? const MainScreen() : const StatScreen(),
     );
   }
 }
