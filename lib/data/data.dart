@@ -38,3 +38,14 @@ List transactionTempData = [
     'date': '2 day ago',
   },
 ];
+
+List<String> categoryImageList = [
+  "bill",
+  "entertainment",
+  "food",
+  "home",
+  "pet",
+  "plane",
+  "shopping",
+  "smartphone",
+];
