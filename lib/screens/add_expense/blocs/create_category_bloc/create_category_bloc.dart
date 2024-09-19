@@ -1,15 +1,21 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-
+import 'package:expense_repository/expense_repository.dart';
 part 'create_category_event.dart';
 part 'create_category_state.dart';
 
 class CreateCategoryBloc
     extends Bloc<CreateCategoryEvent, CreateCategoryState> {
-  CreateCategoryBloc() : super(CreateCategoryInitial()) {
-    on<CreateCategoryEvent>((event, emit) {
-      // TODO: implement event handler
+  final ExpenseRepository expenseRepository;
+  CreateCategoryBloc(this.expenseRepository) : super(CreateCategoryInitial()) {
+    on<CreateCategory>((event, emit) async {
+      emit(CreateCategoryInitial());
+      try {
+        await expenseRepository.createCategory(event.category);
+        emit(CreateCategorySuccess());
+      } catch (e) {
+        emit(CreateCategoryFailure());
+      }
     });
   }
 }

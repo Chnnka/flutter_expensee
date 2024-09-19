@@ -7,7 +7,15 @@ import 'app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+      // options: const FirebaseOptions(
+      //   apiKey: "AIzaSyBzdXVQk6YjTNtG8GSnxrSwmsh8C0wmsXE",
+      //   appId: '1:367802688422:android:65f8beb1bca9dbe8c2e567',
+      //   messagingSenderId: 'sendid',
+      //   projectId: 'flutter-expensee',
+      //   storageBucket: "flutter-expensee.appspot.com",
+      // ),
+      );
   Bloc.observer = SimpleBlocObserver();
   runApp(const MyApp());
 }
