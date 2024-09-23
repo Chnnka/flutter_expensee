@@ -139,7 +139,7 @@ class _AddExpenseState extends State<AddExpense> {
                                     'assets/${state.categories[i].icon}.png',
                                     scale: 10,
                                   ),
-                                  title: Text('${state.categories[i].name}'),
+                                  title: Text(state.categories[i].name),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                   )),
